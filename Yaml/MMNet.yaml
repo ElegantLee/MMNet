@@ -1,0 +1,46 @@
+#####
+name: MMNet
+bidirect: False #Unidirectional or bidirectional
+regist: True
+manifold_match: True
+#run_name: 'MMNet/BraTs2015/'
+run_name: 'MMNet/OASIS3/'
+
+save_root: '/checkpoints/'
+image_save: '/results/'
+#dataset: BraTs2015
+dataset: OASIS3
+
+epoch: 0        # starting epoch
+n_epochs: 120       # How often do you want to display output images during training
+batchSize: 16              # size of the batches
+
+# BrainTs2015
+#val_dataroot: 'datasets/BraTs2015/val'
+
+#########OASIS3###########
+val_dataroot: 'datasets/OASIS3/val'
+
+g_lr: 0.0002                   # initial learning rate
+r_lr: 0.0002
+decay_epoch: 60            # epoch to start linearly decaying the learning rate to 0
+size: 256               # size of the data crop
+input_nc: 3
+output_nc: 3
+cuda: True
+n_cpu: 6
+
+# mine
+val_batchSize: 1
+
+# Manifold-Matching
+out_dim: 128     # ML network output dim
+margin: 1.4     # triplet loss margin
+alpha: 0.03     # triplet loss direction guidance weight parameter
+ml_lr: 0.0002
+
+# weight of loss
+lambda_mm: 1
+lambda_img: 20
+lambda_percp: 1
+
