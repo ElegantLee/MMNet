@@ -1,16 +1,7 @@
 #!/usr/bin/python3
 
 import argparse
-import itertools
 import os
-import torchvision.transforms as transforms
-from torch.utils.data import DataLoader
-from torch.autograd import Variable
-from PIL import Image
-import torch
-import torch.nn.functional as F
-import numpy as np
-
 from trainer import MMNet_Trainer
 import yaml
 

@@ -6,20 +6,12 @@ import sys
 from pathlib import Path
 
 import cv2
-# import kornia
-import numpy
-import pandas as pd
-import torchvision.transforms.transforms
 import yaml
-from PIL import Image
 from torch.autograd import Variable
 import torch
 from visdom import Visdom
-import matplotlib.pyplot as plt
 import torch.nn.functional as F
 import numpy as np
-import torch.nn.init as init
-import torch.nn as nn
 
 
 class Resize():
@@ -57,19 +49,9 @@ class ToTensor():
 
 def tensor2image(tensor):
     """
-
     @param tensor: (1, 3, 256, 256)
     @return:
     """
-    # image = (127.5 * (tensor.cpu().float().numpy())) + 127.5
-    # image1 = image[0]
-    # for i in range(1, tensor.shape[0]):
-    #     image1 = np.hstack((image1, image[i]))
-    #
-    # if image.shape[0] == 1:
-    #     image = np.tile(image, (3, 1, 1))
-    # # print ('image1.shape:',image1.shape)
-    # return image1.astype(np.uint8)
     #########################
     # tensor: C H W --> H W C (RGB)
     #########################
@@ -149,7 +131,7 @@ class Logger():
                 self.viz.line(X=np.array([epoch]), Y=np.array([distance]),
                               win=self.distance_windows[distance_name], update='append')
 
-    # 在训练期间画出val datasets上的评价指标变化
+    # plot the learning rate value during training
     def plot_lrs(self, lrs, epoch):
         if not hasattr(self, 'lrs_plot'):
             self.lrs_plot = {}
@@ -202,45 +184,10 @@ class Logger():
 
         # End of epoch
         if (self.batch % self.batches_epoch) == 0:
-            '''
-            if not hasattr(self, 'losses_save'):
-                self.losses_save = {'epoch': []}
-                for loss_name, loss in self.losses.items():
-                    self.losses_save[loss_name] = []
-            # 保存losses
-            for loss_name, loss in self.losses.items():
-                self.losses_save[loss_name].append(loss / self.batch)
-
-            # 保存图片
-            for image_name, tensor in images.items():
-                img_numpy = tensor2image(tensor.data)
-                img_path = Path(os.path.join(self.img_dir, 'epoch%.3d_%s.png' % (self.epoch, image_name))).as_posix()
-                # print('img_path: %s' % img_path)
-                save_image(img_numpy, img_path)
-            '''
             # Plot losses
             for loss_name, loss in self.losses.items():
-                # if loss_name not in self.loss_windows:
-                #     self.loss_windows[loss_name] = self.viz.line(X=np.array([self.epoch]),
-                #                                                  Y=np.array([loss / self.batch]),
-                #                                                  opts={'xlabel': 'epochs', 'ylabel': loss_name,
-                #                                                        'title': loss_name})
-                # else:
-                #     self.viz.line(X=np.array([self.epoch]), Y=np.array([loss / self.batch]),
-                #                   win=self.loss_windows[loss_name], update='append')
-                # Reset losses for next epoch
 
                 self.losses[loss_name] = 0.0
-
-            # self.losses_save['epoch'].append(self.epoch)
-            # df_losses = pd.DataFrame.from_dict(self.losses_save,  orient='columns')
-            # path_save = os.path.join(os.getcwd()) + self.config['save_root'] + self.config['run_name']
-            # if self.config['continue_training']:
-            #     losses_path = Path(path_save + 'losses_continue.csv').as_posix()
-            # else:
-            #     losses_path = Path(path_save + 'losses.csv').as_posix()
-            # # print('losses_path: ', losses_path)
-            # df_losses.to_csv(losses_path, encoding='utf-8')
 
             self.epoch += 1
             self.batch = 1
@@ -283,12 +230,6 @@ class LambdaLR():
 
     def step(self, epoch):
         return 1.0 - max(0, epoch + self.offset - self.decay_start_epoch) / (self.n_epochs - self.decay_start_epoch)
-
-
-def linear_lambda_edge(increase_stop_epoch, current_le, intend_le=0.01):
-    step_le = intend_le / increase_stop_epoch
-    current_le += step_le
-    return current_le
 
 
 def weights_init_normal(m):
