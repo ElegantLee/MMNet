@@ -49,4 +49,4 @@ A PyTorch implementation of "MMNet: A medical image-to-image translation network
 
 ## Acknowledgments
 
-Codes borrows from [Reg-GAN](https://github.com/Kid-Liet/Reg-GAN) and [pytorch-manifold-matching](https://github.com/dzld00/pytorch-manifold-matching). The distribution generator and distribution corrector is modified from [Reg-GAN](https://github.com/Kid-Liet/Reg-GAN) and [VoxelMorph](https://github.com/voxelmorph/voxelmorph).
+Code borrows from [Reg-GAN](https://github.com/Kid-Liet/Reg-GAN) and [pytorch-manifold-matching](https://github.com/dzld00/pytorch-manifold-matching). The distribution generator and distribution corrector is modified from [Reg-GAN](https://github.com/Kid-Liet/Reg-GAN) and [VoxelMorph](https://github.com/voxelmorph/voxelmorph).
