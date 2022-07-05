@@ -19,7 +19,7 @@ A PyTorch implementation of "MMNet: A medical image-to-image translation network
 
 1. The pre-trained models are in "checkpoints/MMNet";
 
-2. Download patial test samples from '', then put them into corresponding dir ("datasets/BraTs2015/val or datasets/OASIS3/val");
+2. Download patial test samples from [GoogleDrive](https://drive.google.com/drive/folders/1C6XNJSUw_1kR8fwYot47WlJTb08pFRu0?usp=sharing), then put them into corresponding dir ("datasets/BraTs2015/val or datasets/OASIS3/val");
 
 3. Modify the MMNet.yaml in "Yaml/MMNet.yaml";
 
@@ -27,7 +27,7 @@ A PyTorch implementation of "MMNet: A medical image-to-image translation network
 
    ```js
    run_name: 'MMNet/BraTs2015/'
-   dataset: OASIS3
+   dataset: BraTs2015
    val_dataroot: 'datasets/BraTs2015/val'
    input_nc: 1
    ```
