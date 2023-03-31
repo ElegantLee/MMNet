@@ -54,9 +54,9 @@ def pairwise_distances(x, y):
 
 def geodesic_distance(x):
     '''
-    计算矩阵x和y之间任意两点的测地线距离
-    @param x: N×M的矩阵
-    @return: 测地线距离矩阵
+    Calculate the geodesic distance of any two points between matrices x and y
+    @param x: N × m matrix
+    @return: Geodesic distance matrix
     '''
     dtype = x.dtype
     x = x.detach().cpu().to(torch.double).numpy()

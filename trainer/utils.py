@@ -101,7 +101,6 @@ class Logger():
         if not os.path.exists(self.img_dir):
             os.makedirs(self.img_dir)
 
-    # 评价指标可视化
     def plot_metrics(self, metrics, epoch):
         if not hasattr(self, 'metrics_plot'):
             self.metrics_plot = {}
